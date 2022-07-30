@@ -1,16 +1,26 @@
 {
   "name": "httyped",
-  "main": "index.js",
+  "keywords": [],
+  "author": "nei7",
+  "license": "ISC",
   "type": "module",
+  "main": "dist/cli.mjs",
+  "bin": {
+    "httyped": "bin/httyped.mjs"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "tsx src/cli.ts",
     "test": "jest",
     "build": "unbuild",
     "lint": "eslint"
   },
-  "keywords": [],
-  "author": "nei7",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nei7/httyped.git"
+  },
   "dependencies": {
     "chalk": "^5.0.1",
     "debug": "^4.3.4",

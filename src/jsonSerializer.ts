@@ -22,6 +22,7 @@ export default function jsonSerializer(json: any, interfaceName = "") {
 function createUnionType(types: string[]) {
   return types.length > 1 ? `(${types.join(" | ")})` : types.join(" | ");
 }
+
 const setTypeDescriptor = (typeName: string, type: string) =>
   `interface ${typeName} ${type}`;
 

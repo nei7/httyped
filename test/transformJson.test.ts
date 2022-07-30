@@ -12,6 +12,6 @@ describe("test transform", () => {
       age: 12,
     });
 
-    expect(result).toBeInstanceOf(String);
+    expect(result).toBeDefined();
   });
 });
