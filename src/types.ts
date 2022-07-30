@@ -11,4 +11,5 @@ export interface GenerateOptions {
   url: string;
   file: string;
   method: HttpMethod;
+  typeName?: string;
 }

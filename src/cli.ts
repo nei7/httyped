@@ -32,6 +32,11 @@ function options(args: Argv<{}>) {
       type: "string",
       describe: "output file",
       demandOption: true,
+    })
+    .option("typeName", {
+      alias: "n",
+      type: "string",
+      describe: "type name",
     });
 }
 
