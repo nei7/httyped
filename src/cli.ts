@@ -3,6 +3,7 @@ import { hideBin } from "yargs/helpers";
 import { generate } from "./commands/generate";
 import { GenerateOptions } from "./types";
 import { HttpMethod } from "./types";
+import consola from "consola";
 
 function options(args: Argv<{}>) {
   return args
@@ -40,6 +41,14 @@ function options(args: Argv<{}>) {
     });
 }
 
+process.on("unhandledRejection", (err) =>
+  consola.error("[unhandledRejection]", err)
+);
+
+process.on("uncaughtException", (err) =>
+  consola.error("[uncaughtException]", err)
+);
+
 yargs(hideBin(process.argv))
   .scriptName("httyped")
   .usage("$0 [args]")
@@ -50,9 +59,12 @@ yargs(hideBin(process.argv))
       return options(args);
     },
     async (argv) => {
-      const status = await generate(argv as GenerateOptions);
-      process.exit(status);
+      try {
+        const status = await generate(argv as GenerateOptions);
+        process.exit(status);
+      } catch (err) {
+        consola.error(err);
+      }
     }
   )
-
   .parse();

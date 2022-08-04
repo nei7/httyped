@@ -1,15 +1,14 @@
-import debug from "debug";
+import { appendFile } from "fs/promises";
 import fetch from "node-fetch";
-import jsonSerializer from "../jsonSerializer";
+import consola from "consola";
+import { join } from "path";
+import jsonSerializer, { pascalCase } from "../jsonSerializer";
 import { GenerateOptions } from "../types";
-import { capitalize } from "../utils";
-import fs from "fs";
-
-const _debug = debug("httyped:generate");
+import chalk from "chalk";
 
 export async function generate(options: GenerateOptions): Promise<number> {
   if (!options.file.endsWith(".ts")) {
-    console.error("invalid file type");
+    consola.error("invalid file type");
     return 1;
   }
 
@@ -29,7 +28,13 @@ export async function generate(options: GenerateOptions): Promise<number> {
       options.typeName ?? getInterfaceNameFromUrl(response.url)
     );
 
-    fs.appendFileSync(options.file, result);
+    await appendFile(options.file, result);
+
+    const path = join(process.cwd(), options.file);
+
+    consola.info(
+      `🪄  Your types have been generated in ${chalk.blueBright(path)}`
+    );
   }
 
   return 0;
@@ -41,5 +46,5 @@ function getInterfaceNameFromUrl(url: string): string {
     url.lastIndexOf("/") + 1,
     endIndex === -1 ? undefined : endIndex
   );
-  return capitalize(lastParam) + "Response";
+  return pascalCase(lastParam) + "Response";
 }
