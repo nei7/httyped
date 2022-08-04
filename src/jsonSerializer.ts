@@ -32,7 +32,7 @@ export default function jsonSerializer(json: any, interfaceName = "") {
   return serializerContext.types
     .map(({ objType, name }, index) => {
       const stringTypeMap = Object.entries(objType || [])
-        .map(([key, name]) => `  ${key}: ${name};\n`)
+        .map(([key, name]) => `  ${checkKebabCase(key)}: ${name};\n`)
         .reduce((a, b) => (a += b), "");
 
       let interfaceString = `interface ${name} {\n`;
@@ -42,6 +42,10 @@ export default function jsonSerializer(json: any, interfaceName = "") {
       return interfaceString;
     })
     .join("\n\n");
+}
+
+function checkKebabCase(s: string) {
+  return s.includes("-") ? `"${s}"` : s;
 }
 
 function compareObjects(obj1: object, obj2: object) {
