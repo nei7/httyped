@@ -24,19 +24,14 @@ export default function jsonSerializer(json: any, interfaceName = "") {
   };
 
   if (isArray(json)) {
-    return `type ${interfaceName} = ${convertArray(
-      json,
-      interfaceName,
-      serializerContext,
-      0
-    )} \n`;
+    convertArray(json, interfaceName, serializerContext, 0);
+  } else {
+    serializerContext.types.push({
+      name: interfaceName,
+      objType: convertObject(json, serializerContext, 0),
+      depth: 0,
+    });
   }
-
-  serializerContext.types.push({
-    name: interfaceName,
-    objType: convertObject(json, serializerContext, 0),
-    depth: 0,
-  });
 
   return serializerContext.types
     .map(({ objType, name }, index) => {

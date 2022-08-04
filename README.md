@@ -7,3 +7,8 @@
 npx httyped --url [URL] --method [http method] --file [path to file]
 ```
 
+## Preview
+
+<p align="center">
+  <img src="https://github.com/nei7/httyped/blob/master/static/preview.gif">
+</p>

@@ -40,7 +40,7 @@ export async function generate(options: GenerateOptions): Promise<number> {
 
     spinner.clear();
 
-    consola.info(
+    consola.success(
       `🪄  Your types have been generated in ${chalk.blueBright(path)}`
     );
   }
