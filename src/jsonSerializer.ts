@@ -23,6 +23,15 @@ export default function jsonSerializer(json: any, interfaceName = "") {
     types: [],
   };
 
+  if (isArray(json)) {
+    return `type ${interfaceName} = ${convertArray(
+      json,
+      interfaceName,
+      serializerContext,
+      0
+    )} \n`;
+  }
+
   serializerContext.types.push({
     name: interfaceName,
     objType: convertObject(json, serializerContext, 0),
