@@ -1,0 +1,37 @@
+{
+  "name": "httyped",
+  "author": "nei7",
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/cli.mjs",
+  "bin": {
+    "httyped": "bin/httyped.mjs"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "tsx src/cli.ts",
+    "test": "jest",
+    "build": "unbuild",
+    "lint": "eslint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nei7/httyped.git"
+  },
+  "dependencies": {
+    "chalk": "^5.0.1",
+    "consola": "^2.15.3",
+    "node-fetch": "^3.2.9",
+    "ora": "^6.1.2",
+    "serializer": "^1.0.0",
+    "yargs": "^17.5.1"
+  },
+  "devDependencies": {
+    "@types/debug": "^4.1.7",
+    "@types/yargs": "^17.0.10",
+    "tsx": "^3.8.0",
+    "unbuild": "^0.7.6"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "serializer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.mjs",
+  "typings": "dist/index.d.ts",
+  "files": {},
+  "scripts": {
+    "build": "unbuild"
+  }
+}

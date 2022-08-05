@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "target": "ES2021",
     "module": "ESNext",
     "moduleResolution": "node",
@@ -7,6 +8,11 @@
     "declaration": true,
     "noUnusedLocals": false,
     "esModuleInterop": true,
-    "useUnknownInCatchVariables": false
+    "useUnknownInCatchVariables": false,
+    "types": ["node", "jest"],
+
+    "paths": {
+      "@httyped/*": ["packages/*/src/index.ts"]
+    }
   }
 }

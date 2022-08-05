@@ -1,48 +1,31 @@
 {
   "name": "httyped",
-  "keywords": [],
-  "author": "nei7",
-  "license": "ISC",
-  "type": "module",
-  "main": "dist/cli.mjs",
-  "bin": {
-    "httyped": "bin/httyped.mjs"
-  },
-  "files": [
-    "dist"
-  ],
-  "scripts": {
-    "dev": "tsx src/cli.ts",
-    "test": "jest",
-    "build": "unbuild",
-    "lint": "eslint"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/nei7/httyped.git"
-  },
-  "dependencies": {
-    "chalk": "^5.0.1",
-    "consola": "^2.15.3",
-    "node-fetch": "^3.2.9",
-    "ora": "^6.1.2",
-    "yargs": "^17.5.1"
-  },
+  "description": "A cli tool that can generate typescript types from http request",
+  "private": true,
+  "license": "MIT",
   "devDependencies": {
-    "@types/debug": "^4.1.7",
+    "@commitlint/cli": "^17.0.3",
+    "@commitlint/config-conventional": "^17.0.3",
     "@types/jest": "^28.1.6",
-    "@types/node": "^18.6.2",
-    "@types/yargs": "^17.0.10",
-    "@typescript-eslint/eslint-plugin": "^5.31.0",
-    "@typescript-eslint/parser": "^5.31.0",
-    "eslint": "^8.20.0",
+    "@types/node": "^18.6.4",
+    "@typescript-eslint/eslint-plugin": "^5.32.0",
+    "@typescript-eslint/parser": "^5.32.0",
+    "eslint": "^8.21.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-n": "^15.2.4",
     "eslint-plugin-promise": "^6.0.0",
     "jest": "^28.1.3",
-    "ts-jest": "^28.0.7",
-    "tsx": "^3.8.0",
-    "unbuild": "^0.7.6"
+    "lerna": "^5.3.0",
+    "ts-jest": "^28.0.7"
+  },
+  "scripts": {
+    "lint": "eslint"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "engines": {
+    "node": "^16.11.0"
   }
 }

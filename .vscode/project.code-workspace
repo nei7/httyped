@@ -1,0 +1,17 @@
+{
+  "folders": [
+    {
+      "name": "ROOT",
+      "path": "../"
+    },
+    {
+      "name": "packages/cli",
+      "path": "../packages/cli"
+    },
+    {
+      "name": "packages/extension",
+      "path": "../packages/extension"
+    }
+  ],
+  "settings": {}
+}
