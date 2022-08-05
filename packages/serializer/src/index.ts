@@ -7,10 +7,15 @@ import {
   isObject,
   isOptional,
   onlyUnique,
-  pascalCase,
 } from "./utils";
 
-export default function jsonSerializer(json: any, interfaceName = "") {
+export const pascalCase = (str: string) =>
+  str
+    .split("_")
+    .map((s) => (s[0] ? s[0].toUpperCase() : "") + s.slice(1))
+    .join("");
+
+export function jsonSerializer(json: any, interfaceName = "Root") {
   const serializerContext: SerializerContext = {
     types: [],
   };

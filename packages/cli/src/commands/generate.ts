@@ -2,7 +2,7 @@ import { appendFile } from "fs/promises";
 import fetch from "node-fetch";
 import consola from "consola";
 import { join } from "path";
-import jsonSerializer from "serializer";
+import { pascalCase, jsonSerializer } from "serializer";
 import { GenerateOptions } from "../types";
 import chalk from "chalk";
 import ora from "ora";
@@ -47,12 +47,6 @@ export async function generate(options: GenerateOptions): Promise<number> {
 
   return 0;
 }
-
-const pascalCase = (str: string) =>
-  str
-    .split("_")
-    .map((s) => (s[0] ? s[0].toUpperCase() : "") + s.slice(1))
-    .join("");
 
 function getInterfaceNameFromUrl(url: string): string {
   const endIndex = url.lastIndexOf("?");

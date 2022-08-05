@@ -26,12 +26,6 @@ export function onlyUnique(value: any, index: number, self: any[]) {
   return self.indexOf(value) === index;
 }
 
-export const pascalCase = (str: string) =>
-  str
-    .split("_")
-    .map((s) => (s[0] ? s[0].toUpperCase() : "") + s.slice(1))
-    .join("");
-
 export function checkKebabCase(s: string) {
   return s.includes("-") ? `"${s}"` : s;
 }

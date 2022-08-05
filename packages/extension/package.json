@@ -1,7 +1,7 @@
 {
   "name": "extension",
-  "displayName": "extension",
-  "description": "ss",
+  "displayName": "httyped",
+  "description": "Generate typescript interfaces from api requests",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.69.2"
@@ -10,14 +10,14 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:extension.helloWorld"
+    "onCommand:httyped.httyped"
   ],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "extension.helloWorld",
-        "title": "Hello World"
+        "command": "httyped.httyped",
+        "title": "Httyped"
       }
     ]
   },
