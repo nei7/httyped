@@ -1,5 +1,5 @@
 <h1 align="center">📑 Httyped</h1>
-<p align="center">A cli tool that can generate typescript types from http request</p>
+<p align="center">A cli tool and vscode extension that can generate typescript types from http request</p>
 
 ## Usage
 

@@ -1,6 +1,6 @@
 {
   "name": "httyped",
-  "description": "A cli tool that can generate typescript types from http request",
+  "description": "A cli tool and vscode extension that can generate typescript types from http request",
   "private": true,
   "license": "MIT",
   "devDependencies": {

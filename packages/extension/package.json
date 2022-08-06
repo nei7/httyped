@@ -1,11 +1,16 @@
 {
-  "name": "extension",
+  "name": "httyped",
   "displayName": "httyped",
   "description": "Generate typescript interfaces from api requests",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.69.2"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nei7/httyped.git"
+  },
+  "publisher": "nei7",
   "categories": [
     "Other"
   ],
@@ -29,14 +34,13 @@
     "compile-tests": "tsc -p . --outDir out",
     "watch-tests": "tsc -p . -w --outDir out",
     "pretest": "npm run compile-tests && npm run compile && npm run lint",
-    "lint": "eslint src --ext ts",
     "test": "node ./out/test/runTest.js"
   },
   "devDependencies": {
     "@types/glob": "^7.2.0",
     "@types/mocha": "^9.1.1",
     "@types/node": "16.x",
-    "@types/vscode": "latest",
+    "@types/vscode": "^1.69.1",
     "@typescript-eslint/eslint-plugin": "^5.31.0",
     "@typescript-eslint/parser": "^5.31.0",
     "@vscode/test-electron": "^2.1.5",
