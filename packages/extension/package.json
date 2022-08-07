@@ -4,8 +4,14 @@
   "description": "Generate typescript interfaces from api requests",
   "version": "0.0.1",
   "engines": {
-    "vscode": "^1.69.2"
+    "vscode": "^1.69.0"
   },
+  "keywords": [
+    "http",
+    "api",
+    "ts",
+    "typescript"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nei7/httyped.git"

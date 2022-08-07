@@ -38,6 +38,10 @@ function options(args: Argv<{}>) {
       alias: "n",
       type: "string",
       describe: "type name",
+    })
+    .option("body", {
+      alias: "b",
+      type: "string",
     });
 }
 

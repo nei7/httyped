@@ -19,9 +19,15 @@ export async function generate(options: GenerateOptions): Promise<number> {
 
   spinner.start();
 
+  const body = getBody(options.body);
   const response = await fetch(options.url, {
+    headers: {
+      "Content-type": body ? "application/json" : "text/html",
+    },
     method: options.method,
+    body,
   });
+  spinner.clear();
 
   const contentType = response.headers.get("Content-type");
   if (
@@ -38,8 +44,6 @@ export async function generate(options: GenerateOptions): Promise<number> {
 
     const path = join(process.cwd(), options.file);
 
-    spinner.clear();
-
     consola.success(
       `🪄  Your types have been generated in ${chalk.blueBright(path)}`
     );
@@ -55,4 +59,15 @@ function getInterfaceNameFromUrl(url: string): string {
     endIndex === -1 ? undefined : endIndex
   );
   return pascalCase(lastParam) + "Response";
+}
+
+function getBody(body?: string) {
+  if (!body) {
+    return undefined;
+  }
+  try {
+    return JSON.parse(body) && JSON.stringify(body);
+  } catch (err) {
+    return body;
+  }
 }
