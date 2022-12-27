@@ -1,0 +1,12 @@
+{
+  "name": "@httyped/core",
+  "private": true,
+  "main": "dist/index.mjs",
+  "typings": "dist/index.d.ts",
+  "version": "1.0.0",
+  "files": {},
+  "scripts": {
+    "build": "unbuild",
+    "test": "jest"
+  }
+}

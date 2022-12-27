@@ -1,7 +1,6 @@
 {
-  "name": "cli",
-  "author": "nei7",
-  "license": "MIT",
+  "name": "@httyped/cli",
+  "private": true,
   "type": "module",
   "main": "dist/cli.mjs",
   "bin": {
@@ -16,16 +15,12 @@
     "build": "unbuild",
     "lint": "eslint"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/nei7/httyped.git"
-  },
   "dependencies": {
+    "@httyped/core": "^1.0.0",
     "chalk": "^5.0.1",
     "consola": "^2.15.3",
     "node-fetch": "^3.2.9",
     "ora": "^6.1.2",
-    "serializer": "^1.0.0",
     "yargs": "^17.5.1"
   },
   "devDependencies": {

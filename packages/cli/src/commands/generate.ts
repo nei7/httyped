@@ -2,7 +2,7 @@ import { appendFile } from "fs/promises";
 import fetch from "node-fetch";
 import consola from "consola";
 import { join } from "path";
-import { pascalCase, jsonSerializer } from "serializer";
+import { parse } from "@httyped/core";
 import { GenerateOptions } from "../types";
 import chalk from "chalk";
 import ora from "ora";
@@ -34,11 +34,8 @@ export async function generate(options: GenerateOptions): Promise<number> {
     contentType &&
     contentType.toLocaleLowerCase().includes("application/json")
   ) {
-    const json = await response.json();
-    const result = jsonSerializer(
-      json,
-      options.typeName ?? getInterfaceNameFromUrl(response.url)
-    );
+    const json = await response.text();
+    const result = parse(json);
 
     await appendFile(options.file, result);
 
@@ -50,15 +47,6 @@ export async function generate(options: GenerateOptions): Promise<number> {
   }
 
   return 0;
-}
-
-function getInterfaceNameFromUrl(url: string): string {
-  const endIndex = url.lastIndexOf("?");
-  const lastParam = url.substring(
-    url.lastIndexOf("/") + 1,
-    endIndex === -1 ? undefined : endIndex
-  );
-  return pascalCase(lastParam) + "Response";
 }
 
 function getBody(body?: string) {

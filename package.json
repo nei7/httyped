@@ -20,7 +20,8 @@
     "ts-jest": "^28.0.7"
   },
   "scripts": {
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "jest"
   },
   "workspaces": [
     "packages/*"
