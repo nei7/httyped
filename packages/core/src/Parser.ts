@@ -1,3 +1,4 @@
+import ParserError from "./Error";
 import { Graph } from "./Graph";
 import render from "./render";
 import {
@@ -12,6 +13,7 @@ import { isArray, isObject, isPrimitive } from "./utils";
 
 class Parser {
   private _graph = new Graph();
+  private level = 0;
 
   parse(input: any): Graph {
     this.visit("root", typeof input === "string" ? JSON.parse(input) : input);
@@ -23,14 +25,22 @@ class Parser {
       case isPrimitive(data):
         return this.parsePrimitive(name, data, isOptional);
 
-      case isObject(data):
+      case isObject(data): {
+        this.level++;
+
         return this._graph.addNewNode(this.parseObject(name, data, isOptional));
+      }
 
       case isArray(data):
         return this.parseArray(name, data, isOptional);
 
       default:
-        throw new Error();
+        throw new ParserError(
+          `Can't parse typeof=${typeof data}`,
+          "",
+          name,
+          this.level
+        );
     }
   }
 

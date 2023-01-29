@@ -7,43 +7,61 @@ import { GenerateOptions } from "../types";
 import chalk from "chalk";
 import ora from "ora";
 
-export async function generate(options: GenerateOptions): Promise<number> {
-  if (!options.file.endsWith(".ts")) {
+export async function generate(params: GenerateOptions): Promise<number> {
+  if (!params.file.endsWith(".ts")) {
     consola.error("invalid file type");
     return 1;
   }
 
   const spinner = ora({
-    text: "Sending http request to: " + chalk.blueBright(options.url),
+    text: "Sending http request to: " + chalk.blueBright(params.url),
   });
 
   spinner.start();
 
-  const body = getBody(options.body);
-  const response = await fetch(options.url, {
+  const body = getBody(params.body);
+  const response = await fetch(params.url, {
     headers: {
       "Content-type": body ? "application/json" : "text/html",
     },
-    method: options.method,
+    method: params.method,
     body,
   });
+
   spinner.clear();
+
+  if (!response.ok) {
+    consola.error(
+      "Request to",
+      chalk.underline.blueBright(params.url),
+      "failed."
+    );
+
+    return 1;
+  }
 
   const contentType = response.headers.get("Content-type");
   if (
     contentType &&
     contentType.toLocaleLowerCase().includes("application/json")
   ) {
-    const json = await response.text();
-    const result = parse(json);
+    try {
+      const json = await response.text();
 
-    await appendFile(options.file, result);
+      const result = parse(json);
 
-    const path = join(process.cwd(), options.file);
+      await appendFile(params.file, result);
 
-    consola.success(
-      `🪄  Your types have been generated in ${chalk.blueBright(path)}`
-    );
+      const path = join(process.cwd(), params.file);
+
+      consola.success(
+        `🪄  Your types have been generated in ${chalk.underline.blueBright(
+          path
+        )}`
+      );
+    } catch (err) {
+      consola.error(err);
+    }
   }
 
   return 0;
@@ -53,6 +71,7 @@ function getBody(body?: string) {
   if (!body) {
     return undefined;
   }
+
   try {
     return JSON.parse(body) && JSON.stringify(body);
   } catch (err) {
