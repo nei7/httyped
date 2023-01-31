@@ -3,14 +3,18 @@ import fetch from "node-fetch";
 import consola from "consola";
 import { join } from "path";
 import { parse } from "@httyped/core";
-import { GenerateOptions } from "../types";
+import { GenerateOptions } from "./types";
 import chalk from "chalk";
 import ora from "ora";
 
-export async function generate(params: GenerateOptions): Promise<number> {
+export async function generate(params: GenerateOptions) {
   if (!params.file.endsWith(".ts")) {
-    consola.error("invalid file type");
-    return 1;
+    consola.error(
+      "Please provide valid output file extension",
+      chalk.bold.blueBright("(.ts)")
+    );
+
+    process.exit(1);
   }
 
   const spinner = ora({
@@ -19,13 +23,12 @@ export async function generate(params: GenerateOptions): Promise<number> {
 
   spinner.start();
 
-  const body = getBody(params.body);
   const response = await fetch(params.url, {
     headers: {
-      "Content-type": body ? "application/json" : "text/html",
+      "Content-type": params.body ? "application/json" : "text/html",
     },
     method: params.method,
-    body,
+    body: JSON.stringify(params.body),
   });
 
   spinner.clear();
@@ -37,7 +40,7 @@ export async function generate(params: GenerateOptions): Promise<number> {
       "failed."
     );
 
-    return 1;
+    process.exit(1);
   }
 
   const contentType = response.headers.get("Content-type");
@@ -62,19 +65,7 @@ export async function generate(params: GenerateOptions): Promise<number> {
     } catch (err) {
       consola.error(err);
     }
-  }
-
-  return 0;
-}
-
-function getBody(body?: string) {
-  if (!body) {
-    return undefined;
-  }
-
-  try {
-    return JSON.parse(body) && JSON.stringify(body);
-  } catch (err) {
-    return body;
+  } else {
+    consola.error("Can't create typescript types from given url");
   }
 }
