@@ -6,6 +6,7 @@ import { HttpMethod } from "./types";
 import consola from "consola";
 import inquirer, { QuestionCollection } from "inquirer";
 import figlet from "figlet";
+import chalk from "chalk";
 
 const httpMethods: HttpMethod[] = [
   "POST",
@@ -60,14 +61,11 @@ yargs(hideBin(process.argv))
     },
 
     async (argv) => {
+      console.log(chalk.blueBright(figlet.textSync("httyped")), "\n");
+
       const questions: QuestionCollection = {
         url: {
           message: "Specify target url",
-          validate: (input) => {
-            return /A-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi.test(
-              input
-            );
-          },
         },
         method: {
           message: "Choose http method",
@@ -88,9 +86,7 @@ yargs(hideBin(process.argv))
             .map((name) => ({ name, ...questions[name] }))
         );
 
-        console.log(answers, argv);
-
-        await generate(argv as GenerateOptions);
+        await generate({ ...answers, ...argv } as GenerateOptions);
       } catch (err) {
         consola.error(err);
       }

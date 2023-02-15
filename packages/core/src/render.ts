@@ -1,5 +1,5 @@
 import { Graph } from "./Graph";
-import { isObjectType, ObjectType, Type } from "./Type";
+import { ObjectType } from "./Type";
 
 export default function render(graph: Graph, indent = 2): string {
   const indentStr = " ".repeat(indent);
