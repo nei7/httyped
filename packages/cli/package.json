@@ -27,6 +27,6 @@
     "@types/debug": "^4.1.7",
     "@types/yargs": "^17.0.10",
     "tsx": "^3.8.0",
-    "unbuild": "^0.7.6"
+    "unbuild": "^2.0.0"
   }
 }
